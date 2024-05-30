@@ -68,6 +68,17 @@ def test_gpt4_tiktoken_equality(text):
     gpt4_tokenizer_ids = tokenizer.encode(text)
     assert gpt4_tokenizer_ids == tiktoken_ids
 
+def test_gpt4_benchmark(benchmark):
+    """
+    Benchmark test. For more details see https://pypi.org/project/pytest-benchmark/.
+    """
+    text = unpack(test_strings[-1])
+    tokenizer = GPT4Tokenizer()
+
+    @benchmark
+    def encode():
+        tokenizer.encode(text)
+
 # test the handling of special tokens
 def test_gpt4_tiktoken_equality_special_tokens():
     tokenizer = GPT4Tokenizer()
